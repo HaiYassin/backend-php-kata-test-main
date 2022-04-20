@@ -24,7 +24,6 @@ class TemplateManagerTest extends \PHPUnit_Framework_TestCase
         InstructorRepository::getInstance()->save(new Instructor(1, "jean", "rock"));
         MeetingPointRepository::getInstance()->save(new MeetingPoint(1, "http://lambda.to", "paris 5eme"));
         ApplicationContext::getInstance()->setCurrentUser(new Learner(1, "toto", "bob", "toto@bob.to"));
-
     }
 
     /**
@@ -72,7 +71,7 @@ L'équipe Ornikar
 
         $this->assertEquals('Votre leçon de conduite avec ' . $expectedInstructor->firstname, $message->subject);
         $this->assertEquals("
-Bonjour Toto,
+Bonjour ". ucfirst(strtolower($expectedUser->firstname)) .",
 
 La reservation du " . $start_at->format('d/m/Y') . " de " . $start_at->format('H:i') . " à " . $end_at->format('H:i') . " avec " . $expectedInstructor->firstname . " a bien été prise en compte!
 Voici votre point de rendez-vous: " . $expectedMeetingPoint->name . ".
